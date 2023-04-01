@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>mail</title>
+</head>
+<body>
+<table style="margin-bottom:20px">
+  <tr>
+    <td>
+      <table style="border-collapse: collapse;">
+        <tr>
+          <td>
+            <h3>邮件模板</h3>
+            <table>
+              <tr>
+                <td colspan="2" style="padding: 0 0 3px 0">
+                  公司名称：<span th:text="${emailParam.companyName}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0 3px 0">
+                  地址：<span th:text="${emailParam.address}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0 3px">
+                  联系人：<span th:text="${emailParam.phone}"></span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
