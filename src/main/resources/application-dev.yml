@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: mail_demo
+  config:
+    import: custom/application-dev-custom.yml
   mail:
     host: smtp.163.com
     port: 465

@@ -5,6 +5,7 @@ import indi.ly.crush.mail.core.config.AsyncConfig;
 import indi.ly.crush.mail.core.event.SendEmailEvent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.event.EventListener;
 import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.lang.NonNull;
@@ -26,10 +27,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SendEmailEventListener {
 	final Log logger = LogFactory.getLog(this.getClass());
-	final IMailService iMailServiceProxyImpl;
+	final IMailService iMultiMailServiceProxyImpl;
 	
-	public SendEmailEventListener(IMailService iMailServiceProxyImpl) {
-		this.iMailServiceProxyImpl = iMailServiceProxyImpl;
+	public SendEmailEventListener(
+			 @Qualifier(value = "mailServiceImpl") IMailService iMailServiceProxyImpl
+//			@Qualifier(value = "multiMailServiceImpl") IMailService iMultiMailServiceProxyImpl
+	) {
+		this.iMultiMailServiceProxyImpl = iMailServiceProxyImpl;
 	}
 	
 	@Async
@@ -37,7 +41,7 @@ public class SendEmailEventListener {
 	@EventListener
 	public void handler(@NonNull SendEmailEvent event) {
 		logger.info(Thread.currentThread());
-		this.iMailServiceProxyImpl.sendMail(event.getMail());
+		this.iMultiMailServiceProxyImpl.sendMail(event.getMail());
 	}
 	
 	@Recover
